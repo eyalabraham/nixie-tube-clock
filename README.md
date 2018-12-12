@@ -55,16 +55,17 @@ Achieve the effect of digit multiplexing and intensity control by varying the 'o
 
 ```
 **SPI Command interface**
-| Command byte  |    Response   |  Second transmit byte  |    Response                |
-|:-------------:|:--------------|:-----------------------|:---------------------------|
-|    1          |     dummy     | Minutes digit          | Current Minutes digit      |
-|    2          |     dummy     | 10s minutes digit      | Current 10s minutes digit  |
-|    3          |     dummy     | Hours digit digit      | Current Hours digit digit  |
-|    4          |     dummy     | 10s hours digit        | Current 10s hours digit    |
-|    5          |     dummy     | Brightness 0 to 10     | dummy                      |
-|    6          |     dummy     | dummy                  | Get light sensor 0 to 255  |
-|    7          |     dummy     | dummy                  | Code rev in 2 nibbles      |
-|   85          |     dummy     | dummy                  |     170                    |
+
+ | Command byte  |    Response   |  Second transmit byte  |    Response                |
+ |:-------------:|:--------------|:-----------------------|:---------------------------|
+ |    1          |     dummy     | Minutes digit          | Current Minutes digit      |
+ |    2          |     dummy     | 10s minutes digit      | Current 10s minutes digit  |
+ |    3          |     dummy     | Hours digit digit      | Current Hours digit digit  |
+ |    4          |     dummy     | 10s hours digit        | Current 10s hours digit    |
+ |    5          |     dummy     | Brightness 0 to 10     | dummy                      |
+ |    6          |     dummy     | dummy                  | Get light sensor 0 to 255  |
+ |    7          |     dummy     | dummy                  | Code rev in 2 nibbles      |
+ |   85          |     dummy     | dummy                  |     170                    |
 
 Commands 1 through 4 are used to send new digits to be displayed on the Nixie tubes.
 A value of 0 to 9 displays digits 0 to 9, a value greater than 9 blanks a digit.
