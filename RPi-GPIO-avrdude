@@ -14,7 +14,7 @@ CLK         GPIO11  SCLK    23          19  (PB5/SCK)
 CS          GPIO7   CE1     26          16  (PB2/SS)
 
 NOTE: Do not activate/load the native RPi SPI driver.
-AVRdude will bit-bang the ICP, and communication will be run through the BCM2835 SPI library.
+AVRdude will bit-bang the ICP, RPi to AVR clock communication will be through the BCM2835 SPI library.
 
 ============================================================================================
  Manual GPIO8 toggle (reset line)

@@ -153,5 +153,6 @@ This project uses the bcm2835 'C' library and the matching Python bindings. The 
 - **configuration.py** clock configuration and XML parsing module
 - **dispatcher.py** time-based function dispatcher class module
 - **clock.xml** configuration file
+- **startup.sh** A shell script used to auto start the clock app in Raspberry Pi. Link through `/etc/rc.local`
 - **README.md** this file
 

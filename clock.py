@@ -46,7 +46,7 @@ def initialize():
     try:
         gpio_initialized = soc.bcm2835_init()
 
-        # Reset the AVR and the force GPIO8, pin 24, to high to enable the AVR
+        # Reset the AVR and then force GPIO8, pin 24, to high to enable the AVR
         soc.bcm2835_gpio_fsel(soc.RPI_GPIO_P1_24, soc.BCM2835_GPIO_FSEL_OUTP)
         _avr_reset()
         
@@ -141,7 +141,7 @@ def time_display(param):
 # Private functions
 #
 
-def __scroll_rtl(digits=(0,0,0,0), digit_delay=1.0):
+def _scroll_rtl(digits=(0,0,0,0), digit_delay=1.0):
     """Scroll the digits into the display shifting them from right to left."""
 
     for shift in range(0,4):
