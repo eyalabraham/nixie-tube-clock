@@ -1,24 +1,26 @@
 # Nixie Tube clock with Raspberry Pi Zero W
 Project web page [https://sites.google.com/site/eyalabraham/nixie-tube-clock]
 ## Feature list
-- Hour and minute display
-- LED multi function indicator: seconds or blink rate change when errors
-- Self adjusting time
-  - NTP
++ Hour and minute display
++ Date display
++ LED multi function indicator: seconds or blink rate change when errors
++ Self adjusting time
+  + NTP based
   - Visible indication when no connection to time source
   - Default time and time keeping when no connection to time source
-- Intensity control and dimming of tubes based LDR light sensor
-- Watchdog communication protection between Raspberry Pi and AVR controller
-- Nixie protection; ‘slot machine’ effect
-- Clock tube display on/off (High Voltage on/off) by hour of the day
-- High Voltage shut off via logic control
-- SSH for management
-- XML configuration
++ Intensity control and dimming of tubes based LDR light sensor
++ Watchdog communication protection between Raspberry Pi and AVR controller
++ Nixie protection; ‘slot machine’ effect
++ Clock tube display on/off (High Voltage on/off) by hour of the day
++ High Voltage shut off via logic control
++ SSH for management
++ XML configuration
   - Default time keeping when no connection
   - NTP setup; source, time zone
-  - Default time format as 24 and 12 hour format (no AM PM indicator)
-  - ‘Slot machine’ effect configuration
-  - Clock on/off periods such as time of day; e.g. midnight to 7am
+  + Default time format as 24 and 12 hour format (no AM PM indicator)
+  + ‘Slot machine’ effect configuration
+  + Clock on/off periods such as time of day; e.g. midnight to 7am
+  + Date display configuration
 ## Software
 ### Raspberry Pi
 - NTP

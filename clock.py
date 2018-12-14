@@ -26,12 +26,13 @@ DIGIT_OFF = 10
 # Internal variables  
 display = [0,0,0,0]
 gpio_initialized = 0
+date_display_lock = 0
 slot_machine_lock = 0
 
 # Clock configuration variables
 CFG_CLOCK_12HOUR = 0        # 12 or 24 hour time format
 CFG_SLOT_MACHINE = 2        # Minute interval for slot machine effect
-CFG_SHOW_DATE = 0           # TODO Show date at top of hour
+CFG_SHOW_DATE = 0           # Show date at top of hour
 CFG_DIPLAY_OFF = (0,0)      # Turn off clock display
 CFG_DISPLAY_ON = (8,0)      # Turn on clock display
 
@@ -74,7 +75,7 @@ def watchdog(param={}):
 def time_display(param):
     """Clock display driver."""
 
-    global slot_machine_lock
+    global slot_machine_lock, date_display_lock
     global CFG_CLOCK_12HOUR, CFG_SLOT_MACHINE, CFG_SHOW_DATE, CFG_DIPLAY_OFF, CFG_DISPLAY_ON
 
     # Parse configuration changes if any
@@ -125,6 +126,15 @@ def time_display(param):
     if display[0] == 0 and CFG_CLOCK_12HOUR == 1:
         display[0] = DIGIT_OFF
 
+    # Date display at top of hour
+    if CFG_SHOW_DATE == 1 and t.tm_min == 0:
+        if date_display_lock == 0:
+            _show_date(t.tm_mday, t.tm_mon, t.tm_year, display)
+            date_display_lock = 1
+            slot_machine_lock = 1
+    else:
+        date_display_lock = 0
+
     # Periodic slot machine effect
     # TODO the lock will prohibit the effect from running on 1-min interval
     if t.tm_min % CFG_SLOT_MACHINE == 0:
@@ -154,6 +164,38 @@ def _scroll_rtl(digits=(0,0,0,0), digit_delay=1.0):
             cmd = cmd + 1
         watchdog()
         time.sleep(digit_delay)
+
+def _show_date(day, month, year, digits=(0,0,0,0)):
+    """Display date sequence and then revert to content on 'digits'."""
+    
+    # Blank the display
+    d = [10,10,10,10]
+    _display(d)
+    watchdog()
+    time.sleep(1)
+
+    # Scroll month and day
+    d[0] = int(month/10)
+    d[1] = month - d[0]*10
+    d[2] = int(day/10)
+    d[3] = day - d[2]*10
+    if d[0] == 0:
+        d[0] = 10
+    if d[2] == 0:
+        d[2] = 10
+    _scroll_rtl(d)
+    time.sleep(2)
+
+     # Scroll year
+    d[0] = int(year/1000)
+    d[1] = int((year - d[0]*1000)/100)
+    d[2] = int((year - d[0]*1000 - d[1]*100)/10)
+    d[3] = int(year - d[0]*1000 - d[1]*100 - d[2]*10)
+    _display(d)
+    watchdog()
+    time.sleep(3)
+
+    _display(digits)
 
 def _slot_machine(digits=(0,0,0,0)):
     """
