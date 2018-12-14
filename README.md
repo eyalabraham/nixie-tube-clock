@@ -6,8 +6,8 @@ Project web page [https://sites.google.com/site/eyalabraham/nixie-tube-clock]
 + LED multi function indicator: seconds or blink rate change when errors
 + Self adjusting time
   + NTP based
-  - Visible indication when no connection to time source
-  - Default time and time keeping when no connection to time source
+  - (not implemented) Visible indication when no connection to time source
+  - (not implemented) Default time and time keeping when no connection to time source
 + Intensity control and dimming of tubes based LDR light sensor
 + Watchdog communication protection between Raspberry Pi and AVR controller
 + Nixie protection; ‘slot machine’ effect
@@ -15,8 +15,8 @@ Project web page [https://sites.google.com/site/eyalabraham/nixie-tube-clock]
 + High Voltage shut off via logic control
 + SSH for management
 + XML configuration
-  - Default time keeping when no connection
-  - NTP setup; source, time zone
+  - (not implemented) Default time keeping when no connection
+  - (not implemented) NTP setup; source, time zone
   + Default time format as 24 and 12 hour format (no AM PM indicator)
   + ‘Slot machine’ effect configuration
   + Clock on/off periods such as time of day; e.g. midnight to 7am
@@ -71,11 +71,11 @@ Achieve the effect of digit multiplexing and intensity control by varying the 'o
 
 Commands 1 through 4 are used to send new digits to be displayed on the Nixie tubes.
 A value of 0 to 9 displays digits 0 to 9, a value greater than 9 blanks a digit.
-The response to the second byte allows to check what the controller is currently displaying, by comparing the digit sent to the controller to the one returned from it.
+The response to the second byte is the digit that was displayed and replace by the one just sent. This is used to produce some effects such as digit shifting.
 
-Brightness command with value 0 turns off all segment by turning off high voltage, values 1 through 10 control the brightness from low to high.
+Brightness command with value 0 turns off all tunes by turning off high voltage, values 1 through 10 control the brightness from low to high.
 
-The notation 'dummy' denotes a dummy byte of 0xff that is sent or received by ignored.
+The notation 'dummy' denotes a dummy byte of 0xff that is sent or received but ignored.
 
 Command number 85 (0x55) is a keep alive and check for response 170 (0xAA). This command is sent periodically: if there is no response from the AVR, the RPi will issue a reset on GPIO8, if it is not received by the AVR, the AVR will blank the display and fast-flash the seconds LED.
 
@@ -155,6 +155,6 @@ This project uses the bcm2835 'C' library and the matching Python bindings. The 
 - **configuration.py** clock configuration and XML parsing module
 - **dispatcher.py** time-based function dispatcher class module
 - **clock.xml** configuration file
-- **startup.sh** A shell script used to auto start the clock app in Raspberry Pi. Link through `/etc/rc.local`
+- **startup.sh** A shell script used to auto start the clock app in Raspberry Pi. Link through crontab
 - **README.md** this file
 
