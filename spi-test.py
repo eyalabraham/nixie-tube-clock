@@ -15,8 +15,8 @@ import libbcm2835._bcm2835 as soc
 def main():
     """Initialize SPI, send a few bytes, then close and exit."""
     
-    print 'initializing GPIO:', soc.bcm2835_init()
-    print 'initializing SPI:', soc.bcm2835_spi_begin()
+    print('initializing GPIO:', soc.bcm2835_init())
+    print('initializing SPI:', soc.bcm2835_spi_begin())
 
     soc.bcm2835_spi_setBitOrder(soc.BCM2835_SPI_BIT_ORDER_MSBFIRST)
     soc.bcm2835_spi_setDataMode(soc.BCM2835_SPI_MODE0)
@@ -26,10 +26,10 @@ def main():
 
     for i in range(0,100):
         data_byte = soc.bcm2835_spi_transfer(i)
-        print 'sent:',i,'returned:', data_byte
+        print('sent:',i,'returned:', data_byte)
 
     soc.bcm2835_spi_end()
-    print 'closing GPIO:', soc.bcm2835_close()
+    print('closing GPIO:', soc.bcm2835_close())
 
 ###############################################################################
 #

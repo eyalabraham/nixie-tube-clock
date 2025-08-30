@@ -3,7 +3,7 @@
 # startup.sh
 #
 #   Shell script used to auto start the clock app in Raspberry Pi.
-#   Use with crontab: '@reboot /home/pi/nixie-clock/software/startup.sh'
+#   Use with crontab: '@reboot /home/eyal/nixie-clock/software/startup.sh'
 #
 
 GO_FILE='/home/pi/nixie-clock/software/go'

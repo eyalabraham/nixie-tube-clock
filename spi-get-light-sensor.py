@@ -21,7 +21,7 @@ def main():
     WATCH_DOG_REPLY = 170
     DUMMY = 255
     
-    print 'initializing GPIO:', soc.bcm2835_init()
+    print('initializing GPIO:', soc.bcm2835_init())
     
     # Reset the AVR and the force GPIO8, pin 24, to high to enable the AVR
     soc.bcm2835_gpio_fsel(soc.RPI_GPIO_P1_24, soc.BCM2835_GPIO_FSEL_OUTP)
@@ -31,7 +31,7 @@ def main():
     
     time.sleep(1)
     
-    print 'initializing SPI:', soc.bcm2835_spi_begin()
+    print('initializing SPI:', soc.bcm2835_spi_begin())
 
     soc.bcm2835_spi_setBitOrder(soc.BCM2835_SPI_BIT_ORDER_MSBFIRST)
     soc.bcm2835_spi_setDataMode(soc.BCM2835_SPI_MODE0)
@@ -44,17 +44,17 @@ def main():
         
         soc.bcm2835_spi_transfer(SPI_CMD_GET_LIGHT)  # send command
         data_byte = soc.bcm2835_spi_transfer(DUMMY)  # read response
-        print 'Light sensor: ', data_byte
+        print('Light sensor: ', data_byte)
         
         # Periodic watch-dog 'keep alive'
         soc.bcm2835_spi_transfer(SPI_CMD_WDOG)       # send command
         data_byte = soc.bcm2835_spi_transfer(DUMMY)  # read response
         if data_byte != WATCH_DOG_REPLY:
-            print 'Watch-dog reply missing. received: ', data_byte
+            print('Watch-dog reply missing. received: ', data_byte)
             break
 
     soc.bcm2835_spi_end()
-    print 'closing GPIO:', soc.bcm2835_close()
+    print('closing GPIO:', soc.bcm2835_close())
 
 ###############################################################################
 #

@@ -36,12 +36,12 @@ class Dispatcher:
 
         if func_ref_name:
             if func_ref_name in self.__dispatch_table:
-                print self.dispatch_table[func_ref_name]
+                print(self.dispatch_table[func_ref_name])
             else:
-                print 'Function {} not registered.'.format(func_ref_name)
+                print('Function {} not registered.'.format(func_ref_name))
         else:
             for name in self.dispatch_table:
-                print self.dispatch_table[name]
+                print(self.dispatch_table[name])
 
     def dispatch(self):
         """
