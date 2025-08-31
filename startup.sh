@@ -12,7 +12,7 @@ GO_FILE='/home/pi/nixie-clock/software/go'
 if [ -f $GO_FILE ]; then
 
     # If 'GO' file exists, then auto-start the clock app.
-    cd /home/pi/nixie-clock/software
+    cd /home/eyal/nixie-clock/software
     sudo python nixie_clock.py &
 
 # If there is no 'GO' file just exit the script
